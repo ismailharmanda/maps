@@ -3,6 +3,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "@types/faker": "^5.5.9",
     "faker": "^5.5.3"
   }
 }
