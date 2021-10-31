@@ -117,44 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/CustomMap.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CustomMap = void 0;
-
-var CustomMap =
-/** @class */
-function () {
-  function CustomMap(divId) {
-    this.googleMap = new google.maps.Map(document.querySelector("#" + divId), {
-      zoom: 1,
-      center: {
-        lat: 0,
-        lng: 0
-      }
-    });
-  }
-
-  CustomMap.prototype.addUserMarker = function (user) {
-    new google.maps.Marker({
-      map: this.googleMap,
-      position: {
-        lat: user.location.lat,
-        lng: user.location.lng
-      }
-    });
-  };
-
-  CustomMap.prototype.addCompanyMaker = function (company) {};
-
-  return CustomMap;
-}();
-
-exports.CustomMap = CustomMap;
-},{}],"node_modules/faker/lib/fake.js":[function(require,module,exports) {
+})({"node_modules/faker/lib/fake.js":[function(require,module,exports) {
 /*
   fake.js - generator method for combining faker methods based on string input
 
@@ -136905,7 +136868,84 @@ exports['zh_TW'] = require('./locales/zh_TW');
 var Faker = require('./lib');
 var faker = new Faker({ locales: require('./lib/locales') });
 module['exports'] = faker;
-},{"./lib":"node_modules/faker/lib/index.js","./lib/locales":"node_modules/faker/lib/locales.js"}],"src/User.ts":[function(require,module,exports) {
+},{"./lib":"node_modules/faker/lib/index.js","./lib/locales":"node_modules/faker/lib/locales.js"}],"src/Company.ts":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Company = void 0;
+
+var faker_1 = __importDefault(require("faker"));
+
+var Company =
+/** @class */
+function () {
+  function Company() {
+    this.companyName = faker_1.default.company.companyName();
+    this.catchPhrase = faker_1.default.company.catchPhrase();
+    this.location = {
+      lat: +faker_1.default.address.latitude(),
+      lng: +faker_1.default.address.longitude()
+    };
+  }
+
+  return Company;
+}();
+
+exports.Company = Company;
+},{"faker":"node_modules/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CustomMap = void 0;
+
+var CustomMap =
+/** @class */
+function () {
+  function CustomMap(divId) {
+    this.googleMap = new google.maps.Map(document.querySelector("#" + divId), {
+      zoom: 1,
+      center: {
+        lat: 0,
+        lng: 0
+      }
+    });
+  }
+
+  CustomMap.prototype.addUserMarker = function (user) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: user.location.lat,
+        lng: user.location.lng
+      }
+    });
+  };
+
+  CustomMap.prototype.addCompanyMarker = function (company) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: company.location.lat,
+        lng: company.location.lng
+      }
+    });
+  };
+
+  return CustomMap;
+}();
+
+exports.CustomMap = CustomMap;
+},{}],"src/User.ts":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -136941,17 +136981,20 @@ exports.User = User;
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-}); // import { User } from "./User";
-// import { Company } from "./Company";
+});
+
+var Company_1 = require("./Company");
 
 var CustomMap_1 = require("./CustomMap");
 
 var User_1 = require("./User");
 
 var user = new User_1.User();
+var company = new Company_1.Company();
 var customMap = new CustomMap_1.CustomMap("map");
 customMap.addUserMarker(user);
-},{"./CustomMap":"src/CustomMap.ts","./User":"src/User.ts"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+customMap.addCompanyMarker(company);
+},{"./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts","./User":"src/User.ts"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
