@@ -137000,8 +137000,8 @@ var User_1 = require("./User");
 var user = new User_1.User();
 var company = new Company_1.Company();
 var customMap = new CustomMap_1.CustomMap("map");
-customMap.addMarker(user);
 customMap.addMarker(company);
+customMap.addMarker(user);
 },{"./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts","./User":"src/User.ts"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
